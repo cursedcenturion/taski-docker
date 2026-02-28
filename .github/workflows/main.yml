@@ -1,0 +1,21 @@
+# Имя workflow
+name: Main Taski Workflow
+
+# Триггеры запуска
+on:
+  push:
+    branches:
+      - main
+
+# Задачи
+jobs:
+  checkout-and-print-tree:
+    runs-on: ubuntu-latest
+    steps:
+      # Клонируем репозиторий на раннер
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      
+      # Выводим дерево проекта
+      - name: Print project tree
+        run: tree .
