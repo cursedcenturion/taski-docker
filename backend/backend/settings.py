@@ -1,5 +1,8 @@
 import os
+from dotenv import load_dotenv
 from pathlib import Path
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -61,16 +64,26 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {
     'default': {
-        # Меняем настройку Django: теперь для работы будет использоваться
-        # бэкенд postgresql
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'django'),
-        'USER': os.getenv('POSTGRES_USER', 'django'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
-        'HOST': os.getenv('DB_HOST', ''),
-        'PORT': os.getenv('DB_PORT', 5432)
+        'NAME': 'django',                    # Имя БД
+        'USER': 'django_user',                # 👈 ВАЖНО: не postgres, а django_user
+        'PASSWORD': 'mysecretpassword',       # Пароль из .env
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+#DATABASES = {
+    #'default': {
+        # Меняем настройку Django: теперь для работы будет использоваться
+        # бэкенд postgresql
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.getenv('POSTGRES_DB', 'django'),
+        #'USER': os.getenv('POSTGRES_USER', 'django'),
+        #'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'mysecretpassword'),
+        #'HOST': os.getenv('DB_HOST', 'localhost'),
+        #'PORT': os.getenv('DB_PORT', 5432)
+    #}
+#}
 
 
 # Password validation
